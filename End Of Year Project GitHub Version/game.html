@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Firebase (You've included this twice; I'm keeping one instance assuming you need it) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <!-- Axios (You've included this twice; I'm removing the duplicate) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="game.css">
+
+    
+    
+
+    <title>Tic-Tac-Toe</title>
+</head>
+
+<body>
+
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="Mainpage.html">Main Page</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 style="position: absolute; top: 120px; left: 50%; transform: translateX(-50%);">Tic Tac Toe</h2>
+    <div class = "container">
+    <div class="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
+
+    </div>
+
+
+
+    <div class="scoreboard">
+        <h3>Score</h3>
+        <div id="status"></div>
+        <div id="score">Player X: 0 | Player O: 0</div>
+        <div id="currentPlayerTurn"></div> <!-- New element for displaying the current player's turn -->
+    </div>
+   
+
+    
+    <div id="chat">
+        <!-- Chat elements -->
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    
+
+    
+
+        <script>
+
+
+const ws = new WebSocket('ws://localhost:8080');
+const cells = document.querySelectorAll('.cell');
+const statusDiv = document.getElementById('status');
+const messages = document.getElementById('messages');
+const messageInput = document.getElementById('messageInput');
+
+ws.onopen = function(event) {
+  console.log("WebSocket is open now.");
+};
+
+
+
+ws.onmessage = function(event) {
+    const message = JSON.parse(event.data);
+
+    if (message.type === 'gameState') {
+        updateBoard(message.board);
+        updateStatus(message);
+    } else if (message.type === 'chat') {
+        // Check if the message is from the opponent and prepend "Opponent: "
+        if (!message.message.startsWith("You: ")) { // Assuming all your sent messages start with "You: "
+            displayMessage(`Opponent: ${message.message}`);
+        } else {
+            displayMessage(message.message);
+        }
+    }
+};
+
+cells.forEach(cell => {
+    cell.addEventListener('click', () => {
+        if (!cell.textContent) { // Ensure cell is empty before sending move
+            ws.send(JSON.stringify({type: 'move', index: cell.dataset.index}));
+        }
+    });
+});
+
+function updateBoard(board) {
+    cells.forEach((cell, index) => {
+        cell.textContent = board[index];
+    });
+}
+
+function updateStatus(gameState) {
+    // Log scores for debugging
+    console.log(`Scores - Player X: ${gameState.scores.X} | Player O: ${gameState.scores.O}`);
+
+    // Display the game winner or the current player's turn based on the game state
+    statusDiv.textContent = gameState.winner ?
+        (gameState.winner === 'Tie' ? 'Game Tied!' : `${gameState.winner} Wins!`) :
+        ""; // Clear the status when there is no winner yet
+
+    // Update the score display
+    document.getElementById('score').textContent = `Player X: ${gameState.scores.X} | Player O: ${gameState.scores.O}`;
+
+    // Update the current player's turn display
+    // This element is now exclusively for showing whose turn it is
+    const currentPlayerTurnElement = document.getElementById('currentPlayerTurn');
+    if (!gameState.winner) {
+        // Only display the current player's turn if the game is ongoing
+        currentPlayerTurnElement.textContent = `Current Player's Turn: ${gameState.currentPlayer}`;
+    } else {
+        // Clear or provide a relevant message if the game has ended
+        currentPlayerTurnElement.textContent = "";
+    }
+}
+
+function sendMessage() {
+    const message = messageInput.value.trim();
+    if (message) {
+        ws.send(JSON.stringify({type: 'chat', message}));
+        messageInput.value = '';
+        displayMessage(`You: ${message}`);
+    }
+}
+
+function displayMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = message;
+    messages.appendChild(messageDiv);
+    messages.scrollTop = messages.scrollHeight; // Scroll to the latest message
+}
+
+
+
+// Add an event listener for the 'Enter' key on the message input field
+document.getElementById('messageInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') { // Check if the pressed key is 'Enter'
+            event.preventDefault(); // Prevent the default action to avoid form submission or line break
+            sendMessage(); // Call the sendMessage function
+        }
+    });
+    
+</script>
+</body>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</html>

@@ -1,0 +1,17 @@
+body {
+    background-color: #FDF5E6;
+    /* Light beige color for a paper-like background */
+    background-image: url('./images/mainbackground.jpg');
+    /* Replace 'paper_texture.jpg' with the path to your texture image */
+    background-repeat: repeat;
+    /* Repeat the texture across the background */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -1,0 +1,764 @@
+
+
+section {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+
+}
+
+
+.column1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+
+}
+
+.column2 {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+    /* Adjust the minimum width as needed */
+    gap: 30px;
+
+}
+
+
+.column3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Add style for the blank rectangular space */
+.blank-rectangle {
+    background-color: white;
+    height: 60vh;
+    background-image: url('./images/diary.jpg');
+    border-radius: 30px;
+    flex-grow: 1;
+    /* Allow the rectangle to grow and take remaining space */
+    min-width: 400px;
+    /* Adjust the minimum width as needed */
+}
+
+/* Add this CSS to your existing styles */
+.priority-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+
+}
+
+/* Additional styles for the clickable behavior */
+.clickable {
+    cursor: pointer;
+}
+
+
+
+/* Add style for the blue rectangle */
+.blue-rectangle {
+    background: linear-gradient(to right, orange, red);
+    height: 15vh;
+    min-width: 400px;
+    /* Adjust the minimum width as needed */
+
+    border-radius: 30px;
+    flex-grow: 1;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.blue-rectangle:hover{
+    background-color: linear-gradient(to left, orange, red); /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+.blue-rectangle:active{
+    background-color: linear-gradient(to left, orange, red); /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+
+
+
+.task-rectangle {
+    position: relative;
+    /* Required for z-index to work */
+    z-index: 10;
+    /* A value of 10 should be enough if there are no elements with higher z-index */
+    background-image: url('./images/diary.jpg');
+    background-color: cyan;
+    height: 31vh;
+    min-width: 400px;
+
+    border-radius: 30px;
+    flex-grow: 1;
+    padding: 30px;
+
+}
+
+.scrollable-div2 {
+    max-height: 100%; /* Example percentage, adjust according to your layout needs */
+    overflow-y: auto;
+}
+
+#filteredtasks {
+    margin-top: 40px; /* Adjust based on the total height of searchInput, myComboBox, and searchButton */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#sms{
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 20px;
+}
+
+#sms:hover{
+    background-color: #0056b3; /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#sms:active{
+    background-color: #004099; /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+
+#calendarSelect{
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 20px;
+
+}
+
+#calendarSelect:hover{
+    background-color: #0056b3; /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#calendarSelect:active{
+    background-color: #004099; /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+
+
+#calendar{
+    background-color: #96c1aa; /* Primary blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    /* height: 50vh;
+    width: 55vh; */
+    border-radius: 30px;
+    overflow-x: hidden; /* Hide horizontal overflow at this level */
+    max-width: 100%; /* Adjust based on your layout needs */
+    min-width: 769px; /* Use 100% of the modal body's width */
+    min-height: 720px; /* Or any other height that fits your design */
+
+    
+}
+
+.fc-toolbar-title {
+    font-size: 24px; /* Increases the size of the calendar's title (month name, etc.) */
+}
+
+.fc-daygrid-day-number {
+    font-size: 18px; /* Increases the size of the day numbers */
+}
+
+.fc-daygrid-day {
+    height: 100px; /* Adjust the height */
+    width: 100px; /* Adjust the width */
+}
+
+.fc-daygrid-day .fc-daygrid-day-top {
+    font-size: 18px; /* Adjust the date number size */
+    width: 100px;
+}
+
+.fc-daygrid-day .fc-daygrid-day-events {
+    font-size: 14px; /* Adjust the event font size */
+}
+
+.fc-col-header-cell {
+    width: 100px;
+    font-size: 20px; /* Increases the font size */
+    background-color: #f2f2f2; /* Changes the background color */
+    padding: 10px; /* Adjusts the padding */
+    border-right: 1px solid #ddd; /* Adds a border to the right of each header cell */
+}
+
+.custom-modal-size {
+    min-width: 800px; /* Adjust this value based on your needs */
+}
+
+/* For smaller devices, you might want to ensure the modal is full-width */
+@media (max-width: 768px) {
+    .custom-modal-size {
+        max-width: 100%;
+        width: 95%; /* Slightly less than full width for some padding */
+    }
+}
+
+
+
+
+.black-rectangle {
+
+    min-width: 400px;
+    background-color: rgb(0, 0, 0);
+    height: 15vh;
+    border-radius: 30px;
+    flex-grow: 1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: white;
+
+
+
+}
+
+.black-rectangle:hover{
+    background-color: grey; /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+.black-rectangle:active{
+    background-color: gray; /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+.document-rectangle {
+    min-width: 400px;
+    background: linear-gradient(135deg, purple, lightgreen);
+    height: 15vh;
+    border-radius: 30px;
+    flex-grow: 1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: black;
+
+
+}
+.document-rectangle:hover{
+    background-color: grey; /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+.document:active{
+    background-color: gray; /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+.chess-rectangle {
+    min-width: 400px;
+    background-color: white;
+    height: 15vh;
+    border-radius: 30px;
+    flex-grow: 1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: black;
+
+
+}
+
+.chess-rectangle:hover{
+    background-color: grey; /* A darker shade of blue for hover effect */
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+.chess-rectangle:active{
+    background-color: gray; /* Even darker for the click effect */
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+.Weather-rectangle {
+
+
+    /* Adjust height as necessary */
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+
+
+}
+
+#nextTime, #prevTime, #prevDay, #nextDay{
+    border-radius:10px;
+    margin-bottom: 10px;
+    color:#5b548a;
+    background-color: #00feba;
+    height: 35px;
+}
+
+#nextTime:hover{
+    background-color: #558d7e;
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#nextTime:active{
+    background-color:#558d7e;
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+#prevTime:hover{
+    background-color: #558d7e;
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#prevTime:active{
+    background-color: #558d7e;
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+#prevDay:hover{
+    background-color: #558d7e;
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#prevDay:active{
+    background-color: #558d7e;
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+
+#nextDay:hover{
+    background-color: #558d7e;
+    transform: scale(1.05); /* Slightly increase size */
+}
+
+#nextDay:active{
+    background-color: #558d7e;
+    transform: scale(0.95); /* Slightly decrease size to mimic a click */
+}
+
+
+
+
+.card {
+
+    min-width: 400px;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+    border-radius: 20px;
+
+    min-height: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+
+
+    border-radius: 40px;
+    flex: 1;
+
+    font-size: 18px;
+}
+
+.search button {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    /* Added to center the image inside the button */
+    align-items: center;
+    /* Aligns the image vertically in the center */
+    justify-content: center;
+    /* Aligns the image horizontally in the center */
+}
+
+.search button img {
+    width: 40px;
+    /* Adjusted for visual compatibility with the button size */
+    height: auto;
+    /* Keeps the aspect ratio of the image */
+
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img {
+    padding-bottom: 30px;
+    padding-right: 10px;
+    width: 40px;
+
+}
+
+
+.weather-icon {
+    width: 130px;
+    height: 130px;
+    margin-top: 10px;
+
+}
+
+.weather h1 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.weather h2 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.humidity,
+.wind {
+    font-size: 16px;
+    margin-top: -11px;
+}
+
+.weather {
+    display: none;
+
+}
+
+.error {
+    text-align: left;
+
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+
+}
+
+
+/* Add style for the plus button */
+.plus-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    background-color: #428bca;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+
+
+}
+
+
+
+
+
+
+
+
+h4,
+h5,
+h6,
+h7 {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    line-height: 150px;
+    /* Center the text vertically */
+}
+
+h5 {
+    font-family: consolas;
+
+}
+
+h6 {
+    font-family: garamond;
+}
+
+h7 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Add style for the image */
+.blue-image {
+    max-width: 40%;
+    /* Adjust the maximum width as needed */
+    max-height: 40%;
+    /* Adjust the maximum height as needed */
+    border-radius: 15px;
+}
+
+#searchInput {
+    position: absolute;
+    /* Position the search bar absolutely within the container */
+    top: 10px;
+    /* Adjust this value to bring the search bar down from the top */
+    left: 10px;
+    /* Align it to the left */
+    width: 60%;
+    /* Make it as wide as the container */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 20px;
+    height: 60px;
+    border-radius: 20px;
+    flex: 1;
+
+    font-size: 18px;
+}
+
+#myComboBox {
+    position: absolute;
+    /* Position the search bar absolutely within the container */
+    top: 10px;
+    /* Adjust this value to bring the search bar down from the top */
+    right: 8px;
+    /* Align it to the left */
+    width: 30%;
+    /* Make it as wide as the container */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 20px;
+    height: 60px;
+    border-radius: 20px;
+    flex: 1;
+
+    font-size: 18px;
+
+}
+
+#searchButton {
+    position: absolute;
+    /* Position the search bar absolutely within the container */
+    bottom: 10px;
+    right: 8px;
+    padding: 10px 20px;
+
+    font-size: 18px;
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    /* Added to center the image inside the button */
+    align-items: center;
+    /* Aligns the image vertically in the center */
+    justify-content: center;
+    /* Aligns the image horizontally in the center */
+}
+
+.scrollable-div {
+    flex-grow: 1;
+    -ms-overflow-style: none;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.scrollable-div::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+.scrollable-div2 {
+    flex-grow: 1;
+    max-height:100%;
+    -ms-overflow-style: none;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.scrollable-div2::-webkit-scrollbar {
+    width: 20px;
+}
+
+.scrollable-div2::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollable-div2::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.scrollable-div2::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tablets (devices with widths between 768px and 1024px) */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+    .blank-rectangle,
+    .blue-rectangle,
+    .black-rectangle,
+    .chess-rectangle {
+        margin-top: 20px;
+        width: 90%;
+        /* Adjust the width for tablet screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    section {
+        display: flex;
+        gap: 50px;
+        flex-direction: column;
+
+    }
+
+
+
+    h4,
+    h5,
+    h6 {
+        font-size: 30px;
+        /* Adjust font size for tablets */
+    }
+}
+
+/* Smartphones (devices with widths less than 768px) */
+@media only screen and (max-width: 767px) {
+
+    .blank-rectangle,
+    .blue-rectangle,
+    .black-rectangle,
+    .chess-rectangle {
+        flex-direction: column;
+        width: 100%;
+        /* Full width */
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .Weather-rectangle,
+    .card {
+        margin-top: 10px;
+        width: auto;
+        /* Adjust width for small screens */
+    }
+
+    h4,
+    h5,
+    h6 {
+        font-size: 30px;
+        /* Adjust font size for smartphones */
+    }
+
+    .plus-button {
+        bottom: 10px;
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .blue-image {
+    max-width: 60%;
+    /* Adjust the maximum width as needed */
+    max-height: 60%;
+    /* Adjust the maximum height as needed */
+    border-radius: 15px;
+}
+}

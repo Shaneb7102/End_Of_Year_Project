@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+    <style>
+    body {
+        background-color: #FDF5E6;
+        background-image: url('./images/mainbackground.jpg');
+        background-repeat: repeat;
+    }
+
+    .flashcard {
+        background-color: white;
+        height: 30vh;
+        background-image: url('./images/flashcard-template.jpg');
+        border-radius: 30px;
+        flex-grow: 1;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.5s ease;
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    .flashcard:hover {
+        background-color: lightblue;
+    }
+
+    .question,
+    .answer {
+        padding: 10px;
+        text-align: center;
+        backface-visibility: hidden;
+        transform: rotateY(0deg);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        opacity: 1; /* Initially visible */
+    }
+
+    .answer {
+        opacity: 0; /* Initially hidden */
+    }
+
+    
+    .flashcard.flipped .question {
+       
+        opacity: 0;
+    }
+
+    .flashcard.flipped .answer {
+        opacity: 1;
+        
+
+    }
+
+    .navbar {
+        background-color: white;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+
+    .navbar-brand {
+        color: white;
+    }
+
+    .navbar-nav > li > a {
+        color: white;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    center {
+        display: block;
+        margin-top: 20px;
+    }
+
+    h4 {
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 50px;
+        line-height: 150px; /* Center the text vertically */
+    }
+
+
+    </style>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Login and Registration</title>
+</head>
+<body>
+
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="Mainpage.html">Main Page</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse"  >
+        <ul class="nav navbar-nav navbar-right">
+             <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
+        </ul>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div id="flashcardsContainer"></div>
+ 
+    
+
+
+
+
+
+
+</div>
+<br>
+<center>Developed by <a href="https://www.linkedin.com/in/shane-barden-0a56841b3/">Shane Barden</a></center>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script src="flashcard.js"></script>
+</body>
+
+</html>

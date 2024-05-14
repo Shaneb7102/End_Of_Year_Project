@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <link href='https://unpkg.com/fullcalendar@5/main.min.css' rel='stylesheet' />
+    <script src='https://unpkg.com/fullcalendar@5/main.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="calendar.js" type="module"></script>
+
+    <title>Home</title>
+</head>
+
+<body>
+
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="Mainpage.html">Main Page</a>
+            <a class="navbar-brand" href="index.html">Log Out</a>
+
+        </div>
+
+    </div>
+    <br>
+
+
+    <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">New Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Task Form -->
+                        <form name="task_form" id="task_form" method="post" action="#" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="taskDescription">Task Title:</label>
+                                <input type="text" class="form-control" id="taskDescription" name="taskDescription"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDate">Due Date:</label>
+                                <input type="date" class="form-control" id="dueDate" name="dueDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Priority:</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="priority" value="Low"> Low Priority
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="priority" value="Medium"> Medium Priority
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="priority" value="High"> High Priority
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!-- Add a button for form submission if needed -->
+                        <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for FlashCard Options -->
+        <div class="modal fade" id="flashCardOptionsModal" tabindex="-1" role="dialog"
+            aria-labelledby="flashCardOptionsModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="flashCardOptionsModalLabel">FlashCard Options</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Choose an option:</p>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                            data-target="#myModal2">Create a new FlashCard</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal" id="viewFlashCardsBtn">View
+                            already made FlashCards</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!---------FlashCards-->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">New FlashCard</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Task Form -->
+                        <form name="flashcard_form" id="flashcard_form" method="post" action="#"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="taskDescription">Question:</label>
+                                <input type="text" class="form-control" id="flashCardQuestion" name="taskDescription"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Answer:</label>
+                                <textarea class="form-control" id="flashCardAnswer" name="description"
+                                    rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!-- Add a button for form submission if needed -->
+                        <button type="submit" class="btn btn-primary" id="saveFlashCardBtn">Add FlashCard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PhoneNumber Modal-->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Register Phone Number</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Task Form -->
+                        <form name="phonenumber_form" id="phonenumber_form" method="post" action="#"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="taskDescription">Insert Phone Number Below:</label>
+                                <input type="text" class="form-control" id="PhoneNumber" name="phonenum"
+                                    required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!-- Add a button for form submission if needed -->
+                        <button type="submit" class="btn btn-primary" id="savePhoneNumberBtn">Register Phone Number</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="calendarModal" class="modal fade" role="dialog">
+            <div class="modal-dialog custom-modal-size"> <!-- Custom class for sizing -->
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Calendar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="calendar"></div> <!-- Calendar will be rendered here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mainbody">
+
+            <div class="column1">
+                <div class="col-sm-4 task-rectangle">
+                    <div class="scrollable-div2">
+
+                        <input type="text" id="searchInput" placeholder="Search Tasks Here">
+                        <select id="myComboBox" name="options">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                        <button class="search-button" id="searchButton"><img src="images/search.png" width="40"
+                                height="40" onclick="searchfilteredtasks()"></button>
+
+                        <div id="filteredtasks" class="scrollable-div3"></div>      
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-4 blue-rectangle clickable" data-toggle="modal" data-target="#flashCardOptionsModal">
+                    <img src="images/flashcards.png" alt="Image" class="blue-image">
+                    <h4>FlashCards</h4>
+                </div>
+
+
+                <div class="col-sm-4 Weather-rectangle">
+                    <div id="weatherContent">
+                        <div class="card">
+                            <div class="search">
+                                <input type="text" placeholder="enter city name" spellcheck="false">
+                                <button class="search button"><img src="images/search.png"></button>
+                            </div>
+                
+                            <div class="error">
+                                <p>Invalid city name</p>
+                            </div>
+                            <div class="weather">
+                                <h1 class="time">09:00am</h1>
+                                <h1 class="day">Monday</h1>
+                                <img src="weatherimages/rain.png" class="weather-icon">
+                                <h1 class="temp">22°c</h1>
+                                <h2 class="city">New York</h2>
+                                <div class="details">
+                                    <div class="col">
+                                        <img src="weatherimages/humidity.png">
+                                        <div>
+                                            <p class="humidity">50%</p>
+                                            <p>Humidity</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <img src="weatherimages/wind.png">
+                                        <div>
+                                            <p class="wind">15 km/h</p>
+                                            <p>Wind Speed</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="time-navigation">
+                                <button id="prevTime">Previous Time</button>
+                                <button id="nextTime">Next Time</button>
+                            </div>
+
+
+                            <div class="navigation">
+                                <button id="prevDay">Previous Day</button>
+                                <button id="nextDay">Next Day</button>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+
+            </div>
+
+            <div class="column2">
+
+                <div class="col-sm-4 blank-rectangle">
+                    <div class="scrollable-div2">
+                        <h2>Recently Added:</h2>
+                        <div id="fetchedDataContainer" class="scrollable-div3"></div>
+                    </div>
+                    <button class="plus-button" id="plusButton" data-toggle="modal" data-target="#myModal">+</button>
+                </div>
+            </div>
+
+
+            <div class="column3">
+
+                <div class="col-sm-4 black-rectangle clickable" onclick="redirectToChatbot()">
+                    <img src="images/robot.png" alt="Image" class="blue-image">
+                    <h5>Chat-Bot</h5>
+                </div>
+
+                <div class="col-sm-4 document-rectangle clickable" onclick="redirectToAssignments()">
+                    
+                        <img src="images/copy-book.png" alt="Image" class="blue-image">
+                    
+                    
+                    <h7>Assignments</h7>
+
+                </div>
+
+                <div class="col-sm-4 chess-rectangle clickable" onclick="redirectToGames()">
+                    <img src="images/pawn.png" alt="Image" class="blue-image">
+                    <h6>Games</h6>
+                </div>
+               
+
+            </div>
+
+            <div class="column4">
+                <button id="sms" data-toggle="modal" data-target="#myModal3">Click Here to set up SMS Task Reminders</button>
+                <button type="button" id="calendarSelect" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarModal">Open Calendar</button>
+
+                
+                <!-- <div id="calendar"></div> -->
+               
+            </div>
+
+
+
+
+
+        </section>
+
+    </div>
+    <br>
+    <center>Developed by <a href="https://www.linkedin.com/in/shane-barden-0a56841b3/">Shane Barden</a></center>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="data.js"></script>
+    <script src="Weather.js"></script>
+    
+    
+
+</body>
+
+</html>

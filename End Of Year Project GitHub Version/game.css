@@ -1,0 +1,65 @@
+
+.board {
+    padding-top: 140px;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+h2{
+    font-size: 50px;
+   
+}
+
+#status{
+    font-size: 18px; /* Adjust the font size here */
+    color: #333; /* Text color */
+    text-align: center;
+    padding: 20px;
+    width: 100%; /* Full width or adjust as needed */
+    position: absolute; /* Keep it at the bottom */
+    
+
+
+}
+
+.scoreboard{
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+#chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Adjust if necessary */
+}
+
+#messages {
+    box-sizing: border-box; /* Include padding and borders in the element's width */
+    width: 70%; /* This will now be 70% of #chat's width */
+    max-width: 600px; /* Example to prevent it from becoming too wide on large screens */
+    height: 200px;
+    background-color: #f0f0f0;
+    overflow-y: scroll;
+    border: 5px solid #000;
+    padding: 10px;
+    margin-bottom: 10px; /* Space between messages and the input */
+}
+#messageInput { width: calc(55%); }
+
+
+
